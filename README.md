@@ -8,3 +8,6 @@ Dependencies
 3. CCXT
 4. Redis
 5. Dash 1.9.0 +
+
+Redis:
+1. Change `R_CACHE` authentication and database values in `config/config.py`.
