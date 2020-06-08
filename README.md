@@ -4,4 +4,4 @@ A future to spot premium monitor.
 - Python's Dash framework is then used to monitor the premiums.
 
 ##### WORKING SNAPSHOT
-![alt text](arb_working_snapshot.jpeg "Title")
+![alt text](working_snapshot.jpeg "Title")
