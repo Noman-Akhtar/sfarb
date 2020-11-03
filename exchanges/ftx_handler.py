@@ -16,7 +16,8 @@ class Handler:
         self.exchange_obj_cx = ccxt.ftx()
         self.exchange_obj_cf = FTX
         self.feed_handler = FeedHandler()
-        self.fee = Decimal('0.07') / Decimal('100')
+        # self.fee = Decimal('0.07') / Decimal('100')
+        self.fee = 0
         self.fee_on_bid = Decimal('1') - self.fee
         self.fee_on_ask = Decimal('1') + self.fee
         self.futures = self.get_futures()
@@ -30,7 +31,7 @@ class Handler:
                 future_dict['name']: future_dict for future_dict in futures
             }
         ).T
-        futures = futures[futures['type'] == 'future']
+        futures = futures[(futures['type'] == 'future') & ~(futures['name'].str.contains('-HASH'))]
         futures = list(futures['name'])
         return futures
 
@@ -41,6 +42,9 @@ class Handler:
                     spot['base'].str.contains('BULL') |
                     spot['base'].str.contains('BEAR') |
                     spot['base'].str.contains('HEDGE')
+            ) & (
+                spot['symbol'].str.contains('USD') |
+                spot['symbol'].str.contains('USDC')
             )
         ]
         spot = list(spot['symbol'])

@@ -18,7 +18,7 @@ from run.run import redis_obj
 # --------------------------------
 # Page Environment
 # --------------------------------
-refresh_rate = 500
+refresh_rate = 5000
 columns = [
     'underlying', 'future-exchange', 'future-pair', 'future-bid', 'future-ask', 'future-lag (s)',
     'spot-exchange', 'spot-pair', 'spot-bid', 'spot-ask', 'spot-lag (s)',
@@ -133,7 +133,7 @@ def fetch_redis(n_intervals):
     spreads['future-act_bid'] = pd.to_numeric(spreads['future-act_bid']).round(6)
     spreads['spot-act_ask'] = pd.to_numeric(spreads['spot-act_ask']).round(6)
     spreads['spot-act_bid'] = pd.to_numeric(spreads['spot-act_bid']).round(6)
-    spreads['spread-buy'] = (100 * (spreads['spot-act_bid'] - spreads['future-act_ask']) / spreads['future-act_ask']).round(2)
+    spreads['spread-buy'] = (100 * (spreads['future-act_ask'] - spreads['spot-act_bid']) / spreads['spot-act_bid']).round(2)
     spreads['spread-sell'] = (100 * (spreads['future-act_bid'] - spreads['spot-act_ask']) / spreads['spot-act_ask']).round(2)
 
     spreads = spreads[columns]

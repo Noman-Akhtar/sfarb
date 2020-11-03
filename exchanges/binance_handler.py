@@ -16,7 +16,8 @@ class Handler:
         self.exchange_obj_cx = ccxt.binance()
         self.exchange_obj_cf = Binance
         self.feed_handler = FeedHandler()
-        self.fee = Decimal('0.1') / Decimal('100')
+        # self.fee = Decimal('0.1') / Decimal('100')
+        self.fee = 0
         self.fee_on_bid = Decimal('1') - self.fee
         self.fee_on_ask = Decimal('1') + self.fee
         self.futures = self.get_futures()
